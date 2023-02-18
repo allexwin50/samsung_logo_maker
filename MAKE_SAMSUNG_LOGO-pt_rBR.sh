@@ -25,8 +25,9 @@ echo "#  [3] Descompactar LOGO a partir de outra LOGO      #"
 echo "#  [4] Compactar LOGO                                #"
 echo "#  [5] Substituir LOGO do sistema                    #"
 echo "#  [6] Reiniciar sistema                             #"
-echo "#  [7] Limpar (Apaga todas as subpastas de '#LOGO')  #"
-echo "#  [8] Sair                                          #"
+echo "#  [7] Reiniciar em modo de recuperação              #"
+echo "#  [8] Limpar (Apaga todas as subpastas de '#LOGO')  #"
+echo "#  [9] Sair                                          #"
 echo "#====================================================#"
 echo "# Digite a opcao desejada:                           #"
 echo "#====================================================#"
@@ -42,7 +43,8 @@ case "$x" in
 4) clear;echo 4;[ ! -e "logo_extracted" ] && echo "É necessário ter uma logo extraída para executar este comando." && menu;cd /sdcard/#LOGO/logo_extracted;tar cf - `ls | sort -t.` > /sdcard/#LOGO/logo_extracted/logo.bin;mv /sdcard/#LOGO/logo_extracted/logo.bin /sdcard/#LOGO/logo.img;cd /sdcard/#LOGO;echo "Logo recriada com sucesso na memória interna na pasta /#LOGO!";;
 5) clear;echo 5;[ ! -e "logo.img" ] && echo "É necessário que o arquivo 'logo.img' esteja na pasta #LOGO na memória interna para prosseguir." && menu;cat /sdcard/#LOGO/logo.img > /dev/block/by-name/up_param;echo "Logo atualizada!";;
 6) clear;echo 6;echo "Reinciando...";reboot;;
-7) clear;echo 7;rm -rf /sdcard/#LOGO/logo_backup;rm -rf /sdcard/#LOGO/logo_extracted;echo "Tudo limpo!";;
-8) clear;echo "Saindo...";clear;exit;;
+7) clear;echo 7;echo "Reinciando em modo de recuperação...";reboot recovery;;
+8) clear;echo 8;rm -rf /sdcard/#LOGO/logo_backup;rm -rf /sdcard/#LOGO/logo_extracted;echo "Tudo limpo!";;
+9) clear;echo "Saindo...";clear;exit;;
 *) clear;echo "Opção inválida!";esac done };menu
 

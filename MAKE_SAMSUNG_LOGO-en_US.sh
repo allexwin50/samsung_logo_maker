@@ -25,8 +25,9 @@ echo "# [3] Unpack LOGO from another LOGO            #"
 echo "# [4] Compress LOGO                            #"
 echo "# [5] Replace system LOGO                      #"
 echo "# [6] Reboot System                            #"
-echo "# [7] Clear (Delete all subfolders of '#LOGO') #"
-echo "# [8] Exit                                     #"
+echo "# [7] Reboot recovery mode                     #"
+echo "# [8] Clear (Delete all subfolders of '#LOGO') #"
+echo "# [9] Exit                                     #"
 echo "#==============================================#"
 echo "# Enter the desired option:                    #"
 echo "#==============================================#"
@@ -41,7 +42,8 @@ case "$x" in
 4) clear;echo 4;[ ! -e "logo_extracted" ] && echo "You must have an extracted logo to run this command." && menu;cd /sdcard/#LOGO/logo_extracted;tar cf - `ls | sort -t.` > /sdcard/#LOGO/logo_extracted/logo.bin;mv /sdcard/#LOGO/logo_extracted/logo.bin /sdcard/#LOGO/logo.img;cd /sdcard/#LOGO;echo "Logo recreated successfully in internal memory in folder /#LOGO!";;
 5) clear;echo 5;[ ! -e "logo.img" ] && echo "The 'logo.img' file must be in the #LOGO folder in the internal memory to proceed." && menu;cat /sdcard/#LOGO/logo.img > /dev/block/by-name/up_param;echo "Updated logo!";;
 6) clear;echo 6;echo "Rebootting...";reboot;;
-7) clear;echo 7;rm -rf /sdcard/#LOGO/logo_backup;rm -rf /sdcard/#LOGO/logo_extracted;echo "All clean!";;
-8) clear;echo "Leaving...";clear;exit;;
+7) clear;echo 7;echo "Rebootting in recovery mode...";reboot recovery;;
+8) clear;echo 8;rm -rf /sdcard/#LOGO/logo_backup;rm -rf /sdcard/#LOGO/logo_extracted;echo "All clean!";;
+9) clear;echo "Leaving...";clear;exit;;
 *) clear;echo "Invalid option!";esac done };menu
 
